@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Form</title>
+</head>
+<body>
+
+<h2>Add User</h2>
+
+<form th:action="@{/saveUser}" method="post" th:object="${user}">
+    Name: <input type="text" th:field="*{name}" /><br><br>
+    Email: <input type="email" th:field="*{email}" /><br><br>
+    Password: <input type="password" th:field="*{password}" /><br><br>
+
+    <button type="submit">Save</button>
+</form>
+
+<br>
+<a href="/userList">View Users</a>
+
+</body>
+</html>

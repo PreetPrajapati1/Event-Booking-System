@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Seats</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f7f7f7;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        /* Screen */
+          .screen {
+    background: #444;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 15px auto;
+    width: 60%;
+  }
+
+        /* Seats container as grid */
+        .seats-container {
+            display: grid;
+            grid-template-columns: repeat(10, 50px); /* 10 seats per row */
+            gap: 8px;
+            justify-content: center;
+            margin: 20px auto;
+        }
+
+        /* Each seat button */
+        .seat-btn {
+            width: 50px;
+            height: 40px;
+            border-radius: 4px;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+        .seat-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+        }
+
+        .available {
+            background-color: #4CAF50; /* green for available */
+        }
+
+        .booked {
+            background-color: #d32f2f; /* red for booked */
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        a.back-btn {
+            display: inline-block;
+            margin: 20px;
+            padding: 8px 15px;
+            background-color: #2196F3;
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+        }
+
+        a.back-btn:hover {
+            background-color: #0b7dda;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Event Seats</h2>
+
+<div class="screen">
+    SCREEN
+</div>
+
+<form method="post" action="/bookSeat">
+    <div class="seats-container">
+        <div th:each="seat : ${seats}">
+            <button type="submit"
+                    name="seat_id"
+                    th:value="${seat.id}"
+                    th:disabled="${seat.booked}"
+                    th:text="${seat.seatRow + seat.seatNumber}"
+                    class="seat-btn"
+                    th:classappend="${seat.booked} ? ' booked' : ' available'">
+            </button>
+        </div>
+    </div>
+</form>
+
+<a href="/dashboard" class="back-btn">Back to Dashboard</a>
+
+</body>
+</html>
